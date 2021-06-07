@@ -3,7 +3,6 @@ import numpy as np
 import streamlit as st
 import os
 from pathlib import Path
-import plotly.express as px
 import plotly.graph_objects as go
 import base64
 from io import BytesIO
