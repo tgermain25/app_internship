@@ -1,11 +1,22 @@
 import pandas as pd 
 import numpy as np 
 import streamlit as st
+import os
+from pathlib import Path
 import plotly.graph_objects as go
 import base64
 from app_be_prot_1 import FeatureExtractor
 
+
+### PARAMETER ###
+example = 'test.txt'
+
 ### USEFUL FUNCTION ###
+def file_selector(folder_path):
+    filenames = os.listdir(folder_path)
+    selected_filename = st.selectbox('Select a file', filenames)
+    return os.path.join(folder_path, selected_filename)
+
 def get_table_download_link(df):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
     in:  dataframe
@@ -31,7 +42,8 @@ def transform(data,sampfreq, t_volume,t_insp,t_exp,t_pep,t_pip):
 
 ### APP Sidebar ### 
 st.sidebar.title('ResApp')
-task = st.sidebar.selectbox('select a task', ['Individual Signal Analysis','Application Documentation'])
+data_path = Path(st.sidebar.text_input('Select your data directory', value="./data"))
+task = st.sidebar.selectbox('select a task', ['Individual Signal Analysis', 'Cohort Signal Transform','Application Documentation'])
 st.sidebar.header('Feature Extraction Parameters:')
 sampfreq = st.sidebar.number_input('Sampling Frequency:', min_value =0)
 r_start = st.sidebar.number_input('Remove First Seconds', min_value=0)
@@ -46,7 +58,8 @@ if task == 'Individual Signal Analysis':
     st.title('Individual Signal Analysis')
     st.header('Upload Data')
 
-    filename = st.file_uploader('Select a file')
+    filename = file_selector(data_path)
+    st.write('You have selected `%s`' % filename)
     
     set_extraction_param = st.checkbox('Have you select a file and set feature extraction parameters ?')
     if not set_extraction_param:
@@ -126,7 +139,7 @@ elif task == 'Cohort Signal Transform':
 elif task == 'Application Documentation': 
     with st.beta_expander('Features and Time Description'):
         st.subheader('Respiratory Cycle Description')
-        st.image("app_feature_plot.png")
+        st.image("code\\app_feature_plot.png")
         st.subheader('Features')
         st.write('**PEP**: Post Expiration Pause')
         st.write('**PIP**: Post Inspiration Pause')
