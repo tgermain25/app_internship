@@ -59,7 +59,8 @@ if task == 'Individual Signal Analysis':
     st.title('Individual Signal Analysis')
     st.header('Upload Data')
 
-    filename = file_selector(data_path)
+    #filename = file_selector(data_path)
+    filename = st.file_uploader('Select a file')
     st.write('You have selected `%s`' % filename)
     
     set_extraction_param = st.checkbox('Have you select a file and set feature extraction parameters ?')
