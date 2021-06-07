@@ -43,8 +43,7 @@ def transform(data,sampfreq, t_volume,t_insp,t_exp,t_pep,t_pip):
 
 ### APP Sidebar ### 
 st.sidebar.title('ResApp')
-data_path = Path(st.sidebar.text_input('Select your data directory', value="./data"))
-task = st.sidebar.selectbox('select a task', ['Individual Signal Analysis', 'Cohort Signal Transform','Application Documentation'])
+task = st.sidebar.selectbox('select a task', ['Individual Signal Analysis','Application Documentation'])
 st.sidebar.header('Feature Extraction Parameters:')
 sampfreq = st.sidebar.number_input('Sampling Frequency:', min_value =0)
 r_start = st.sidebar.number_input('Remove First Seconds', min_value=0)
@@ -61,7 +60,6 @@ if task == 'Individual Signal Analysis':
 
     #filename = file_selector(data_path)
     filename = st.file_uploader('Select a file')
-    st.write('You have selected `%s`' % filename)
     
     set_extraction_param = st.checkbox('Have you select a file and set feature extraction parameters ?')
     if not set_extraction_param:
