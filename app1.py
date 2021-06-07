@@ -1,23 +1,11 @@
 import pandas as pd 
 import numpy as np 
 import streamlit as st
-import os
-from pathlib import Path
 import plotly.graph_objects as go
 import base64
-from io import BytesIO
 from app_be_prot_1 import FeatureExtractor
 
-
-### PARAMETER ###
-example = 'test.txt'
-
 ### USEFUL FUNCTION ###
-def file_selector(folder_path):
-    filenames = os.listdir(folder_path)
-    selected_filename = st.selectbox('Select a file', filenames)
-    return os.path.join(folder_path, selected_filename)
-
 def get_table_download_link(df):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
     in:  dataframe
@@ -58,7 +46,6 @@ if task == 'Individual Signal Analysis':
     st.title('Individual Signal Analysis')
     st.header('Upload Data')
 
-    #filename = file_selector(data_path)
     filename = st.file_uploader('Select a file')
     
     set_extraction_param = st.checkbox('Have you select a file and set feature extraction parameters ?')
