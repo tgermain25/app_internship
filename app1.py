@@ -140,7 +140,7 @@ elif task == 'Cohort Signal Transform':
 elif task == 'Application Documentation': 
     with st.beta_expander('Features and Time Description'):
         st.subheader('Respiratory Cycle Description')
-        st.image("code\\app_feature_plot.png")
+        st.image("app_feature_plot.png")
         st.subheader('Features')
         st.write('**PEP**: Post Expiration Pause')
         st.write('**PIP**: Post Inspiration Pause')
