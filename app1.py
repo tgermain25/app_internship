@@ -150,10 +150,10 @@ elif task == 'Application Documentation':
 
     with st.beta_expander('Individual Signal Analysis'): 
         st.subheader('Setting Workflow Description')
-        st.write('2. Select task: Individual Signal Analysis')
-        st.write('3. drop or select your data file')
-        st.write('4. set feature extraction parameters. This is just for initialization, you will be able to modify then later on.')
-        st.write('5. check the box \"Have yuo select a file and set feature extraction parameters ?\"')
+        st.write('1. Select task: Individual Signal Analysis')
+        st.write('2. drop or select your data file')
+        st.write('3. set feature extraction parameters. This is just for initialization, you will be able to modify then later on.')
+        st.write('4. check the box \"Have yuo select a file and set feature extraction parameters ?\"')
         
         st.subheader('Analysis')
         st.write('Signal, cycle frequency and period, others features and feature distribution analysis are all tab to visualize data.')
