@@ -1,23 +1,12 @@
 import pandas as pd 
 import numpy as np 
 import streamlit as st
-import os
-from pathlib import Path
 import plotly.graph_objects as go
 import base64
 from app_be_prot_1 import FeatureExtractor
 
 
-
-### PARAMETER ###
-example = 'test.txt'
-
 ### USEFUL FUNCTION ###
-def file_selector(folder_path):
-    filenames = os.listdir(folder_path)
-    selected_filename = st.selectbox('Select a file', filenames)
-    return os.path.join(folder_path, selected_filename)
-
 def get_table_download_link(df):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
     in:  dataframe
@@ -43,8 +32,7 @@ def transform(data,sampfreq, t_volume,t_insp,t_exp,t_pep,t_pip):
 
 ### APP Sidebar ### 
 st.sidebar.title('ResApp')
-data_path = Path(st.sidebar.text_input('Select your data directory', value="./data"))
-task = st.sidebar.selectbox('select a task', ['Individual Signal Analysis', 'Cohort Signal Transform','Application Documentation'])
+task = st.sidebar.selectbox('select a task', ['Individual Signal Analysis','Application Documentation'])
 st.sidebar.header('Feature Extraction Parameters:')
 sampfreq = st.sidebar.number_input('Sampling Frequency:', min_value =0)
 r_start = st.sidebar.number_input('Remove First Seconds', min_value=0)
@@ -59,8 +47,7 @@ if task == 'Individual Signal Analysis':
     st.title('Individual Signal Analysis')
     st.header('Upload Data')
 
-    filename = file_selector(data_path)
-    st.write('You have selected `%s`' % filename)
+    filename = st.file_uploader('')
     
     set_extraction_param = st.checkbox('Have you select a file and set feature extraction parameters ?')
     if not set_extraction_param:
@@ -163,9 +150,8 @@ elif task == 'Application Documentation':
 
     with st.beta_expander('Individual Signal Analysis'): 
         st.subheader('Setting Workflow Description')
-        st.write('1. Select your data directory ')
         st.write('2. Select task: Individual Signal Analysis')
-        st.write('3. select your data file')
+        st.write('3. drop or select your data file')
         st.write('4. set feature extraction parameters. This is just for initialization, you will be able to modify then later on.')
         st.write('5. check the box \"Have yuo select a file and set feature extraction parameters ?\"')
         
