@@ -8,6 +8,7 @@ import base64
 from app_be_prot_1 import FeatureExtractor
 
 
+
 ### PARAMETER ###
 example = 'test.txt'
 
